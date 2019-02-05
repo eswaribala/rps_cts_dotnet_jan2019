@@ -1,0 +1,63 @@
+class InvoiceApp
+    {
+        static void Main()
+        {
+            Hashtable hashtable = new Hashtable();
+            Console.WriteLine("Enter No of Invoices");
+            int size = Convert.ToInt32(Console.ReadLine());
+            Invoice invoice;
+            for (int i = 0; i < size; i++)
+            {
+                invoice = new Invoice();
+                Console.WriteLine("Enter Date");
+                invoice.Date = Convert.ToDateTime(Console.ReadLine());
+                Console.WriteLine("Enter Supplier Name");
+                invoice.SupplierName = Console.ReadLine();
+                Console.WriteLine("Enter Amount");
+                invoice.Amount = Convert.ToInt64(Console.ReadLine());
+                hashtable.Add(new Random().Next(100000), invoice);
+
+            }
+
+            //retrieve details from hashtable
+            //only keys
+            Console.WriteLine("==================================");
+            foreach (Object key in hashtable.Keys)
+            {
+                Console.WriteLine(key);
+                
+            }
+            Console.WriteLine("==================================");
+            //only values
+            foreach (Invoice value in hashtable.Values)
+            {
+                Console.WriteLine(value.Date);
+                Console.WriteLine(value.SupplierName);
+                Console.WriteLine(value.Amount);
+            }
+            Console.WriteLine("==================================");
+            //As a pair
+            Invoice inv;
+            foreach(DictionaryEntry de in hashtable)
+            {
+                Console.Write(de.Key+"\t");
+                inv = (Invoice)de.Value;
+                Console.WriteLine(inv.Date);
+                Console.WriteLine(inv.SupplierName);
+                Console.WriteLine(inv.Amount);
+
+            }
+            Console.WriteLine("==================================");
+            IDictionaryEnumerator dict= hashtable.GetEnumerator();
+            while(dict.MoveNext())
+            {
+                Console.Write(dict.Key+"\t");
+                inv =(Invoice) dict.Value;
+                Console.WriteLine(inv.Date);
+                Console.WriteLine(inv.SupplierName);
+                Console.WriteLine(inv.Amount);
+            }
+
+            Console.Read();
+        }
+    }
